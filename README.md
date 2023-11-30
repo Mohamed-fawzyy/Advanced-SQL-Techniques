@@ -22,6 +22,7 @@ Based on the information available in the different tables, you have to run spec
 <br>
 
 # Prepare the lab environment 📦
+* In this lab, you will use MySQL.
 * <b> Database Used in this Lab</b>
 
 <!-- Side Note: Additional Information -->
@@ -37,16 +38,75 @@ Based on the information available in the different tables, you have to run spec
 
 [chicago_crime](https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-DB0201EN-SkillsNetwork/labs/MySQL/week5/chicago_socioeconomic_data.sql)
 
+1. create a new empty database `Mysql_Learners`
+2. Load the dump files one by one into the database `Mysql_learners` by clicking the Import tab and choose the file.
 
+### Task 1 - Write and execute a SQL query to list the school names, community names and average attendance for communities with a hardship index of 98.
+<img width="1103" alt="Exercise_1_Q1" src="https://github.com/Mohamed-fawzyy/Advanced-SQL-Techniques/assets/111665714/aa7535b6-32be-44d8-a392-4b99235dfba2">
 
+### Task 2 - Write and execute a SQL query to list all crimes that took place at a school. Include case number, crime type and community name.
+<img width="1078" alt="Exercise_1_Q2" src="https://github.com/Mohamed-fawzyy/Advanced-SQL-Techniques/assets/111665714/619a627d-b2c5-4d88-94b4-f537365cbcc2">
 
+### Task 3 - Creating a View
+1. Write and execute a SQL statement to create a view showing the columns listed in the following table, with new column names as shown in the second column.
 
+|       Column name in <br> CHICAGO_PUBLIC_SCHOOLS    | 🔰 Column name in <br> view  
+| --------------------------                          | :----------------:| 
+| NAME_OF_SCHOOL	                          |              School_Name
+| Safety_Icon	                             |              Safety_Rating
+| Family_Involvement_Icon	                 |              Family_Rating
+| Environment_Icon	                        |              Environment_Rating
+| Instruction_Icon	                        |              Instruction_Rating
+| Leaders_Icon	                            |              Leaders_Rating
+| Teachers_Icon	                           |              Teachers_Rating
 
+2. Write and execute a SQL statement that returns all of the columns from the view.
+3.Write and execute a SQL statement that returns just the school name and leaders rating from the view.
+```sql
+CREATE VIEW PRIVATE_VIEW (School_Name, Safety_Rating, Family_Rating, Environment _Rating, Instruction_Rating, Leaders_Rating, Teachers _Rating)
+AS SELECT NAME_OF_SCHOOL, Safety_Icon, Family_Involvement_Icon, Environment_Icon, Instruction_Icon, Leaders_Icon, Teachers_Icon
+FROM CHICAGO_PUBLIC_SCHOOLS;
 
+SELECT * FROM PRIVATE_ VIEW;
+SELECT SCHOOL_NAME, Leaders_Rating FROM PRIVATE_VIEW
+```
 
+### Task 4 - Write the structure of a query to create or replace a stored procedure called UPDATE_LEADERS_SCORE that takes a in_School_ID parameter as an integer and a in_Leader_Score parameter as an integer.
 
+```sql
+--#SET TERMINATOR 0
+CREATE OR REPLACE PROCEDURE
+UPDATE LEADERS SCORE (IN in School ID INTEGER, IN in Leader Score INTEGER)
+LANGUAGE SOL
+BEGIN
+END@
+```
 
+### Task 5 - Inside your stored procedure, write a SQL statement to update the Leaders_Score field in the CHICAGO_PUBLIC_SCHOOLS table for the school identified by in_School_ID to the value in the in_Leader_Score parameter.
 
+```sql
+CREATE OR REPLACE PROCEDURE
+UPDATE_LEADERS_SCORE (IN in_School_ID INTEGER, IN in_Leader_Score INTEGER)
+LANGUAGE SOL
+BEGIN
+UPDATE CHICAGO PUBLIC SCHOOLS
+SET "Leaders Score" = in Leader Score
+WHERE "School_ID" = in_School_ID;
+END@
+```
+
+### Task 6 - Inside your stored procedure, write a SQL IF statement to update the Leaders_Icon field in the CHICAGO_PUBLIC_SCHOOLS table for the school identified by in_School_ID using the following information.
+
+
+|       Score lower limit	    | Score upper limit |      Icon        |
+| --------------------------  | :----------------:| | :----------------:| 
+| NAME_OF_SCHOOL	                          |              School_Name
+| Safety_Icon	                             |              Safety_Rating
+| Family_Involvement_Icon	                 |              Family_Rating
+| Environment_Icon	                        |              Environment_Rating
+| Instruction_Icon	                        |              Instruction_Rating
+| Leaders_Icon	                            |              Leaders_Rating
+| Teachers_Icon	                           |              Teachers_Rating
 
 
 
