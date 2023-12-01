@@ -96,26 +96,105 @@ END@
 ```
 
 ### Task 6 - Inside your stored procedure, write a SQL IF statement to update the Leaders_Icon field in the CHICAGO_PUBLIC_SCHOOLS table for the school identified by in_School_ID using the following information.
+
 
 
 |       Score lower limit	    | Score upper limit |      Icon        |
-| --------------------------  | :----------------:| | :----------------:| 
-| NAME_OF_SCHOOL	                          |              School_Name
-| Safety_Icon	                             |              Safety_Rating
-| Family_Involvement_Icon	                 |              Family_Rating
-| Environment_Icon	                        |              Environment_Rating
-| Instruction_Icon	                        |              Instruction_Rating
-| Leaders_Icon	                            |              Leaders_Rating
-| Teachers_Icon	                           |              Teachers_Rating
+| --------------------------  | ------------------| ----------------| 
+|  80	                        |      99	          |        Very strong |
+|  60	                        |      79	          |        Strong |
+|  40	                        |      59	          |        Average |
+|  20	                        |      39	          |        Weak |
+|  0	                         |      19	          |        Very weak |
 
+```sql
+IF in Leader Score >
+© AND in_Leader_Score < 20 THEN
+UPDATE chicago_public_schools
+SET Safety_Icon
+= 'VERY WEEK
+WHERE in School ID = in School ID:
+ELSEIF in Leader Score
+< 40 THEN
+UPDATE chicago_public_schools
+SET Safety_Icon
+'WEEK
+WHERE in School ID = in School ID;
+ELSEIF in Leader Score
+< 60 THEN
+UPDATE chicago_public_schools
+SET Safety_Icon = 'AVERAGE'
+WHERE in School ID = in School ID;
+ELSEIF in Leader Score
+< 80 THEN
+UPDATE chicago_public_schools
+SET Safety_Icon
+'STRONG'
+WHERE in School ID = in School ID:
+ELSEIF in Leader Score
+< 100 THEN
+UPDATE chicago_public_schools
+SET Safety_Icon =
+'VERY STRONG'
+WHERE in School ID = in School ID;
+```
 
+### Task 7 - Write a query to call the stored procedure, passing a valid school ID and a leader score of 50, to check that the procedure works as expected.
+* Run your code to create the stored procedure.
+```sql
+CREATE OR REPLACE PROCEDURE UPDATE_LEADERS_SCORE (IN in_School_ID INTEGER, IN in_Leader_Score INTEGER)
+LANGUAGE SQL
+BEGIN
+UPDATE CHICAGO_ PUBLIC_SCHOOLS
+SET "Leaders_Score" = in_Leader_Score
+WHERE "School_ID" = in_School_ID;
 
+IF in_Leader_Score > 0 AND in_Leader_Score <20 THEN
+    UPDATE CHICAGO_PUBLIC_SCHOOLS
+    SET "Leaders icon" = 'Very weak';
 
+ELSEIF in Leader Score < 40 THEN
+    UPDATE CHICAGO_PUBLIC_SCHOOLS
+    SET "Leaders icon" = 'Weak';
 
+ELSEIF in Leader Score < 60 THEN
+    UPDATE CHICAGO_PUBLIC SCHOOLS
+    SET "Leaders_icon" = 'Average';
 
+ELSEIF in Leader Score < 80 THEN
+    UPDATE CHICAGO_PUBLIC_SCHOOLS
+    SET "Leaders_icon" = 'Strong';
 
+ELSEIF in Leader Score < 100 THEN
+    UPDATE CHICAGO_PUBLIC_SCHOOLS
+    SET "Leaders_icon" = 'Very Strong';
+END IF;
+END@
+```
 
+### Task 8 - Update your stored procedure definition. Add a generic ELSE clause to the IF statement that rolls back the current work if the score did not fit any of the preceding categories.
 
+```sql
+ELSE
+   ROLLBACK;
+-- UPDATE chicago_public_schools
+-- SET Safety_Icon = Safety_Icon
+-- WHERE in_School_ID = School_ID:
+END IF:
+END@
+```
+
+### Task 9 - Update your stored procedure definition again. Add a statement to commit the current unit of work at the end of the procedure.
+
+```sql
+END IF:
+COMMIT:
+END
+@
+```
+
+# Contributing 📝
+Contributions are welcome! Please open an issue or pull request for any changes or improvements.
 
 
 
